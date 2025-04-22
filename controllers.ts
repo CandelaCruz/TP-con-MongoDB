@@ -59,7 +59,46 @@ export const getBooks = async (): Promise<BooksInterface[] | undefined> => {
   }
 };
 
+//get book by id
+export const getBookById = async (id: string): Promise<BooksInterface | null | undefined> => {
+  try {
+    const book = await Books.findById(id);
+    if (!book) {
+      console.log("Book not found");
+    } else {
+      console.log("Book:", book);
+    }
+    return book;
+  } catch (error) {
+    console.error("Book not found for id:", error);
+  }
+};
 
+//update book
+export const updateBook = async (
+  id: string,
+  updates: Partial<BooksInterface>
+): Promise<BooksInterface | null | undefined> => {
+  try {
+    const updatedBook = await Books.findByIdAndUpdate(id, updates, { new: true });
+    console.log("Book updated:", updatedBook);
+    return updatedBook;
+  } catch (error) {
+    console.error("Book not updated:", error);
+  }
+};
+
+//delate book
+
+export const deleteBook = async (id: string): Promise<BooksInterface | null | undefined> => {
+  try {
+    const deletedBook = await Books.findByIdAndDelete(id);
+    console.log("Book deleted:", deletedBook);
+    return deletedBook;
+  } catch (error) {
+    console.error("Book not deleted:", error);
+  }
+};
 
 
 
