@@ -12,6 +12,7 @@ connectDB()
 //Rating->number->required
 
 interface BooksInterface extends Document {
+  _id: ObjectId;
   title: string,
   author: string,
   genre: string,
@@ -19,8 +20,6 @@ interface BooksInterface extends Document {
   available: boolean,
   rating: number
 }
-
-
 
 const booksSchema = new Schema<BooksInterface>({
   title: { type: String, required: true },
@@ -34,3 +33,35 @@ const booksSchema = new Schema<BooksInterface>({
 booksSchema.set("strict", true)
 
 const Books = mongoose.model<BooksInterface>("Books", booksSchema)
+
+//Functions CRUD:
+//Create Book
+
+export const createBook = async (newBook: object): Promise<BooksInterface | undefined> => {
+  try {
+    const book = new Books(newBook);
+    const savedBook = await book.save();
+    console.log("Book created:", savedBook);
+    return savedBook;
+  } catch (error) {
+    console.error(" Book not created:", error);
+  }
+};
+
+//GET BOOKS
+export const getBooks = async (): Promise<BooksInterface[] | undefined> => {
+  try {
+    const books = await Books.find();
+    console.log(" Books:", books);
+    return books;
+  } catch (error) {
+    console.error(" Books not found:", error);
+  }
+};
+
+
+
+
+
+
+
