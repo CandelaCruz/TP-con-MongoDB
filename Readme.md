@@ -1,6 +1,4 @@
-¡Perfecto! Acá tenés **todo tu README completo** con estilo pro, emojis y listo para copiar y pegar en tu proyecto 🧑‍💻👇
 
----
 
 ```markdown
 # 📚 Proyecto CRUD de Libros con MongoDB + TypeScript
